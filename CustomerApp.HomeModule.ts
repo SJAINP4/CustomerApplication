@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { RouterModule } from'@angular/router'
 import { MainRoutes } from '../Routing/CustomerApp.MainRouting';
-import { MasterPageComponent } from './CustomerApp.MasterPageComponent';
 import { HomeComponent } from './CustomerApp.HomeComponent ';
+import { MasterPageComponent } from './CustomerApp.MasterPageComponent';
 
 @NgModule({
   declarations: [
@@ -18,4 +18,4 @@ import { HomeComponent } from './CustomerApp.HomeComponent ';
   providers: [],
   bootstrap: [MasterPageComponent]
 })
-export class MainModule { }
+export class HomeModule { }
