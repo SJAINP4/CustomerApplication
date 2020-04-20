@@ -11,4 +11,10 @@ export class CustomerComponent {
 this.CustomerModels.push(this.CustomerModel)
 this.CustomerModel=new Customer(); //clear UI
   }
+  hasError(typeofvalidator:string, controlname:string) : boolean{
+    return this.CustomerModel
+            .formCustomerGroup
+            .contains[controlname]
+            .hasError(typeofvalidator);
+  }
 }
