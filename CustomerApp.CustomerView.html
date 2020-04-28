@@ -1,19 +1,21 @@
-Customer code: <input [(ngModel)]="CustomerModel.CustomerCode" type=text/><br>
-Customer Name: <input [(ngModel)]="CustomerModel.CustomerName" type=text/><br>
-Customer Amount: <input [(ngModel)]="CustomerModel.CustomerAmount"type=text/><br>
-<input (click)= "Add()"type=button value="Add"/>
-{{CustomerModel.CustomerCode}}<br>
-{{CustomerModel.CustomerName}}<br>
-{{CustomerModel.CustomerAmount}}<br>
-<table>
-    <tr>
-        <td>Customer Code</td>
-        <td>Customer Name</td>
-        <td>Customer Amount</td>
-    </tr>
-    <tr *ngFor= "let cust of CustomerModels">
-        <td>{{cust.CustomerCode}}</td>
-        <td>{{cust.CustomerName}}</td>
-        <td>{{cust.CustomerAmount}}</td>
-    </tr>
-</table>
+<form [formGroup]="CustomerModel.formCustomerGroup">
+Customer Code: <input formControlName= "CustomerCodeControl"
+[(ngModel)]="CustomerModel.CustomerCode" type=text/><br>
+Customer Name: <input formControlName= "CustomerNameControl"
+[(ngModel)]="CustomerModel.CustomerName" type=text/><br>
+Customer Amount: <input [(ngModel)]="CustomerModel.CustomerAmount"
+[ngModelOptions]= "{standalone: true}"
+type=text/><br>
+<input [disabled]= "!(CustomerModel.formCustomerGroup.valid)" (click)= "Add()"type=button value="Add"/>
+<input type="button" value="send to server" (click)="PosttoServer()"/>
+</form>
+<div *ngIf="CustomerModel.formCustomerGroup.dirty" 
+[hidden]="!(hasError('required', 'CustomerCodeControl'))">CustomerCode Format is not proper</div><br>
+<div *ngIf="CustomerModel.formCustomerGroup.dirty" 
+[hidden]="!(hasError('required', 'CustomerCodeControl'))">CustomerCode is required</div><br>
+<div *ngIf="CustomerModel.formCustomerGroup.dirty" 
+[hidden]="!(hasError('required', 'CustomerNameControl'))">CustomerName is required</div><br>
+<grid-ui [grid-columns]="[{'colName':'CustomerCode'},{'colName':'CustomerName'},{'colName':'CustomerAmount'}"
+[grid-data]="CustomerModels"
+(grid-seelcted)= "SelectCustomer($event)"
+></grid-ui>
